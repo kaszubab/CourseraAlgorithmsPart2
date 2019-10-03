@@ -58,6 +58,7 @@ public class SAP {
 
     // length of shortest ancestral path between any vertex in v and any vertex in w; -1 if no such path
     public int length(Iterable<Integer> v, Iterable<Integer> w) {
+        if (v == null || w == null) throw new IllegalArgumentException();
         for (Integer x : v) {
             if (x == null) throw new IllegalArgumentException();
         }
@@ -82,6 +83,7 @@ public class SAP {
 
     // a common ancestor that participates in shortest ancestral path; -1 if no such path
     public int ancestor(Iterable<Integer> v, Iterable<Integer> w) {
+        if (v == null || w == null) throw new IllegalArgumentException();
         for (Integer x : v) {
             if (x == null) throw new IllegalArgumentException();
         }
