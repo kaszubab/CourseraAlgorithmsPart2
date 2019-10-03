@@ -1,5 +1,6 @@
 import edu.princeton.cs.algs4.Bag;
 import edu.princeton.cs.algs4.Digraph;
+import edu.princeton.cs.algs4.DirectedCycle;
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.Stack;
 
@@ -42,6 +43,15 @@ public class WordNet {
                 wordGraph.addEdge(v, Integer.parseInt(fields[i]));
             }
         }
+        DirectedCycle cycle = new DirectedCycle(wordGraph);
+        if (cycle.hasCycle()) throw new IllegalArgumentException("Not a dag");
+        int count = 0;
+        for (int v = 0; v < wordGraph.V(); v++) {
+            if (wordGraph.outdegree(v) == 0) {
+                count++;
+                if (count > 1) throw new IllegalArgumentException();
+            }
+        }
     }
 
     // returns all WordNet nouns
@@ -82,11 +92,9 @@ public class WordNet {
         }
         String anc = mysap.ancestor(verticesV, verticesW) + "";
         if (!anc.equals("-1")) {
-            for (String x : getWords.get(anc)) {
-                return x;
-            }
+            return null;
         }
-        return null;
+        return getWords.get(anc);
     }
 
     // do unit testing of this class
