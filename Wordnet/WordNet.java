@@ -21,12 +21,15 @@ public class WordNet {
         while (file.hasNextLine()) {
             String line  = file.readLine();
             String [] fields = line.split(",");
-            if (!nounDict.containsKey(fields[1])) {
-                Bag<String> newBag = new Bag<>();
-                nounDict.put(fields[1], newBag);
+            String [] words = fields[1].split(" ");
+            for (String x : words) {
+                if (!nounDict.containsKey(x)) {
+                    Bag<String> newBag = new Bag<>();
+                    nounDict.put(x, newBag);
+                }
+                Bag<String> currBag = nounDict.get(x);
+                currBag.add(fields[0]);
             }
-            Bag<String> currBag = nounDict.get(fields[1]);
-            currBag.add(fields[0]);
             getWords.put(fields[0], fields[1]);
         }
         file = new In(hypernyms);
@@ -77,7 +80,13 @@ public class WordNet {
         for (String x : nounDict.get(nounB)) {
             verticesW.push(Integer.parseInt(x));
         }
-        return getWords.get(mysap.ancestor(verticesV, verticesW));
+        String anc = mysap.ancestor(verticesV, verticesW) + "";
+        if (!anc.equals("-1")) {
+            for (String x : getWords.get(anc)) {
+                return x;
+            }
+        }
+        return null;
     }
 
     // do unit testing of this class
