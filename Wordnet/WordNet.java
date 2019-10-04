@@ -11,6 +11,8 @@ public class WordNet {
     private HashMap<String, Bag<String>> nounDict;
     private HashMap<String, String> getWords;
     private Digraph wordGraph;
+    private SAP mysap;
+
     // constructor takes the name of the two input files
     public WordNet(String synsets, String hypernyms) {
         if (synsets == null || hypernyms == null ) {
@@ -52,6 +54,7 @@ public class WordNet {
                 if (count > 1) throw new IllegalArgumentException();
             }
         }
+        mysap = new SAP(wordGraph);
     }
 
     // returns all WordNet nouns
@@ -61,12 +64,14 @@ public class WordNet {
 
     // is the word a WordNet noun?
     public boolean isNoun(String word) {
+        if (word == null) throw new IllegalArgumentException();
         return nounDict.containsKey(word);
     }
 
     // distance between nounA and nounB (defined below)
     public int distance(String nounA, String nounB) {
-        SAP mysap = new SAP(wordGraph);
+        if (!isNoun(nounA) || !isNoun(nounB)) throw new IllegalArgumentException();
+
         Stack<Integer> verticesV = new Stack<>();
         Stack<Integer> verticesW = new Stack<>();
         for (String x : nounDict.get(nounA)) {
@@ -81,6 +86,7 @@ public class WordNet {
     // a synset (second field of synsets.txt) that is the common ancestor of nounA and nounB
     // in a shortest ancestral path (defined below)
     public String sap(String nounA, String nounB) {
+        if (!isNoun(nounA) || !isNoun(nounB)) throw new IllegalArgumentException();
         SAP mysap = new SAP(wordGraph);
         Stack<Integer> verticesV = new Stack<>();
         Stack<Integer> verticesW = new Stack<>();
@@ -91,9 +97,6 @@ public class WordNet {
             verticesW.push(Integer.parseInt(x));
         }
         String anc = mysap.ancestor(verticesV, verticesW) + "";
-        if (!anc.equals("-1")) {
-            return null;
-        }
         return getWords.get(anc);
     }
 
