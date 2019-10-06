@@ -51,6 +51,14 @@ public class SeamCarver {
         checkNull(y);
         checkValue(x);
         checkValue(y);
+        if (x == 0 || x == picture.width()-1  || y == 0 || y == picture.height()-1) return 1000;
+        double squareGradientX = Math.pow(picture.get(x + 1,y).getBlue() - picture.get(x - 1,y).getBlue(),2)
+                + Math.pow(picture.get(x + 1,y).getRed() - picture.get(x - 1,y).getRed(),2)
+                + Math.pow(picture.get(x + 1,y).getGreen() - picture.get(x - 1,y).getGreen(),2);
+        double squareGradientY = Math.pow(picture.get(x ,y+1).getBlue() - picture.get(x ,y-1).getBlue(),2)
+                + Math.pow(picture.get(x ,y+1).getRed() - picture.get(x ,y-1).getRed(),2)
+                + Math.pow(picture.get(x ,y+1).getGreen() - picture.get(x ,y-1).getGreen(),2);
+        return Math.sqrt(squareGradientX + squareGradientY);
     }
 
     // sequence of indices for horizontal seam
