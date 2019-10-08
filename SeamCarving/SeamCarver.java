@@ -9,10 +9,16 @@ import edu.princeton.cs.algs4.Picture;
 public class SeamCarver {
 
     private Picture picture;
+    private double [][] energy;
     // create a seam carver object based on the given picture
     public SeamCarver(Picture picture) {
         checkNull(picture);
         this.picture = new Picture(picture);
+        for (int i = 0; i < picture.width();i++) {
+            for (int j = 0; j < picture.height(); j++) {
+                energy[j][i] = energy(i,j);
+            }
+        }
     }
 
     private void checkValue (int a) {
@@ -30,9 +36,17 @@ public class SeamCarver {
             if (Math.abs(seam[i-1]-seam[i]) > 1) throw new IllegalArgumentException();
         }
     }
+
+    private double calculateEnergy (int mainCoordinate, int secondaryCoordinate) {
+        int point2 = picture.getRGB(mainCoordinate+1,secondaryCoordinate);
+        int point3 = picture.getRGB(mainCoordinate-1,secondaryCoordinate);
+        return Math.pow(((point2 >> 16) & 0xFF) - ((point3 >> 16) & 0xFF),2) +
+        Math.pow(((point2 >> 8) & 0xFF) - ((point3 >> 8) & 0xFF),2) +
+        Math.pow((point2  & 0xFF) - (point3 & 0xFF),2);
+    }
     // current picture
     public Picture picture() {
-        return picture;
+        return new Picture(picture);
     }
 
     // width of current picture
@@ -52,13 +66,7 @@ public class SeamCarver {
         checkValue(x);
         checkValue(y);
         if (x == 0 || x == picture.width()-1  || y == 0 || y == picture.height()-1) return 1000;
-        double squareGradientX = Math.pow(picture.get(x + 1,y).getBlue() - picture.get(x - 1,y).getBlue(),2)
-                + Math.pow(picture.get(x + 1,y).getRed() - picture.get(x - 1,y).getRed(),2)
-                + Math.pow(picture.get(x + 1,y).getGreen() - picture.get(x - 1,y).getGreen(),2);
-        double squareGradientY = Math.pow(picture.get(x ,y+1).getBlue() - picture.get(x ,y-1).getBlue(),2)
-                + Math.pow(picture.get(x ,y+1).getRed() - picture.get(x ,y-1).getRed(),2)
-                + Math.pow(picture.get(x ,y+1).getGreen() - picture.get(x ,y-1).getGreen(),2);
-        return Math.sqrt(squareGradientX + squareGradientY);
+        return Math.sqrt(calculateEnergy(x,y) + calculateEnergy(y,x));
     }
 
     // sequence of indices for horizontal seam
