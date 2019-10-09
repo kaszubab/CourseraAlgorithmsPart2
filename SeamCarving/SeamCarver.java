@@ -23,7 +23,6 @@ public class SeamCarver {
         }
     }
 
-    private void checkValue (int a) {
     private void checkValue(int a) {
         if (a <= 0 || a >= picture.width()) throw new IllegalArgumentException();
     }
@@ -222,6 +221,24 @@ public class SeamCarver {
         checkNull(seam);
         checkSeam(seam, picture.height());
         if (picture.height() == 1) throw new IllegalArgumentException();
+        Picture newPicture = new Picture(picture.width(), picture.height()-1);
+        double [][] newEnergy = new double[picture.width()][picture.height()-1]
+        for (int i = 0; i < picture.width(); i++) {
+            int k = 0;
+            for (int j = 0; j < picture.height(); j++) {
+                if (seam[i] != j) {
+                    newPicture.setRGB(i, k, picture.getRGB(i, j));
+                    newEnergy[i][k] = energy[i][j]
+                    k++;
+                }
+            }
+        }
+        for (int i = 0; i < picture.width(); i++) {
+            if (seam[i] > 0)newEnergy[i][seam[i]-1] = energy(i,seam[i]-1);
+            if (seam[i]<picture.height()-1)newEnergy[i][seam[i]] = energy(i,seam[i]);
+        }
+        picture = newPicture;
+        energy = newEnergy;
     }
 
     // remove vertical seam from current picture
@@ -229,6 +246,24 @@ public class SeamCarver {
         checkNull(seam);
         checkSeam(seam, picture.width());
         if (picture.width() == 1) throw new IllegalArgumentException();
+        Picture newPicture = new Picture(picture.width()-1, picture.height());
+        double [][] newEnergy = new double[picture.width()-1][picture.height()]
+        for (int i = 0; i < picture.height(); i++) {
+            int k = 0;
+            for (int j = 0; j < picture.width(); j++) {
+                if (seam[i] != j) {
+                    newPicture.setRGB(k, i, picture.getRGB(j, i));
+                    newEnergy[k][i] = energy[j][i]
+                    k++;
+                }
+            }
+        }
+        for (int i = 0; i < picture.height(); i++) {
+            if (seam[i] > 0)newEnergy[i][seam[i]-1] = energy(i,seam[i]-1);
+            if (seam[i]<picture.width()-1)newEnergy[i][seam[i]] = energy(i,seam[i]);
+        }
+        picture = newPicture;
+        energy = newEnergy;
     }
 
     //  unit testing (optional)
