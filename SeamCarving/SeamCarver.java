@@ -76,7 +76,7 @@ public class SeamCarver {
     private double setEnergy(int x, int y) {
         checkNull(x);
         checkNull(y);
-        checkValues(x, y);
+        //checkValues(x, y);
         if (x == 0 || x == picture.height()-1  || y == 0 || y == picture.width()-1) return 1000;
         return Math.sqrt(calculateXGradient(x, y) + calculateYGradient(x, y));
     }
@@ -84,7 +84,7 @@ public class SeamCarver {
     public double energy(int x, int y) {
         checkNull(x);
         checkNull(y);
-        checkValues(x, y);
+        checkValues(y, x);
         return energy[y][x];
     }
 
@@ -306,7 +306,7 @@ public class SeamCarver {
         }
         picture = newPicture;
         for (int i = 0; i < picture.height(); i++) {
-            if (seam[i] > 0 && seam[i] < picture.height()) {
+            if (seam[i] > 0 && seam[i] < picture.width()) {
                 newEnergy[i][seam[i] - 1] = setEnergy(i, seam[i] - 1);
                 newEnergy[i][seam[i]] = setEnergy(i, seam[i]);
             }
