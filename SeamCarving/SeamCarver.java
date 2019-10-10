@@ -87,6 +87,12 @@ public class SeamCarver {
 
     // sequence of indices for horizontal seam
     public int[] findHorizontalSeam() {
+        if (picture.height() == 1) {
+            int [] seam = new int [picture.width()];
+            for (int i = 0; i < picture.width(); i++) seam[i]=0;
+            return seam;
+        }
+
         int [][] parent = new int [picture.height()][picture.width()];
         double [][] distTo = new double[picture.height()][picture.width()];
         for (int j = 0; j < picture.height(); j++) {
@@ -108,11 +114,11 @@ public class SeamCarver {
 
             if (distTo[picture.height()-2][i-1] < distTo[picture.height()-1][i-1]) {
                 distTo[picture.height()-1][i] = energy[picture.height()-1][i] + distTo[picture.height()-2][i-1];
-                parent[0][i] = picture.height()-2;
+                parent[picture.height()-1][i] = picture.height()-2;
             }
             else {
                 distTo[picture.height()-1][i] = energy[picture.height()-1][i] + distTo[picture.height()-1][i-1];
-                parent[0][i] = picture.height()-1;
+                parent[picture.height()-1][i] = picture.height()-1;
             }
             // calculating middle of picture
             for (int j = 1; j < picture.height()-1; j++) {
@@ -146,6 +152,13 @@ public class SeamCarver {
                 minIndex = i;
             }
         }
+        for (int i = 0; i < picture.height(); i++) {
+            for (int j = 0; j < picture.width(); j++) {
+                System.out.print(parent[i][j]);
+                System.out.print(" ");
+            }
+            System.out.println();
+        }
         // getting seam
         int [] seam = new int[picture.width()];
         int i = picture.width()-1;
@@ -163,6 +176,12 @@ public class SeamCarver {
 
     // sequence of indices for vertical seam
     public int[] findVerticalSeam() {
+        if (picture.width() == 1) {
+            int [] seam = new int [picture.height()];
+            for (int i = 0; i < picture.height(); i++) seam[i]=0;
+            return seam;
+        }
+
         int [][] parent = new int [picture.height()][picture.width()];
         double [][] distTo = new double[picture.height()][picture.width()];
         for (int j = 0; j < picture.width(); j++) {
@@ -184,11 +203,11 @@ public class SeamCarver {
 
             if (distTo[i-1][picture.width()-2] < distTo[i-1][picture.width()-1]) {
                 distTo[i][picture.width()-1] = energy[i][picture.width()-1] + distTo[i-1][picture.width()-2];
-                parent[i][0] = picture.width()-2;
+                parent[i][picture.width()-1] = picture.width()-2;
             }
             else {
                 distTo[i][picture.width()-1] = energy[i][picture.width()-1] + distTo[i-1][picture.width()-1];
-                parent[i][0] = picture.width()-1;
+                parent[i][picture.width()-1] = picture.width()-1;
             }
             // calculating middle of picture
             for (int j = 1; j < picture.width()-1; j++) {
@@ -223,6 +242,13 @@ public class SeamCarver {
             }
         }
 
+        for (int i = 0; i < picture.height(); i++) {
+            for (int j = 0; j < picture.width(); j++) {
+                System.out.print(parent[i][j]);
+                System.out.print(" ");
+            }
+            System.out.println();
+        }
 
 
         // getting seam
