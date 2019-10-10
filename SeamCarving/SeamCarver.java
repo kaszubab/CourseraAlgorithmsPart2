@@ -82,6 +82,9 @@ public class SeamCarver {
     }
 
     public double energy(int x, int y) {
+        checkNull(x);
+        checkNull(y);
+        checkValues(x, y);
         return energy[y][x];
     }
 
@@ -152,13 +155,7 @@ public class SeamCarver {
                 minIndex = i;
             }
         }
-        for (int i = 0; i < picture.height(); i++) {
-            for (int j = 0; j < picture.width(); j++) {
-                System.out.print(parent[i][j]);
-                System.out.print(" ");
-            }
-            System.out.println();
-        }
+
         // getting seam
         int [] seam = new int[picture.width()];
         int i = picture.width()-1;
@@ -178,7 +175,7 @@ public class SeamCarver {
     public int[] findVerticalSeam() {
         if (picture.width() == 1) {
             int [] seam = new int [picture.height()];
-            for (int i = 0; i < picture.height(); i++) seam[i]=0;
+            for (int i = 0; i < picture.height(); i++) seam[i] = 0;
             return seam;
         }
 
@@ -242,13 +239,6 @@ public class SeamCarver {
             }
         }
 
-        for (int i = 0; i < picture.height(); i++) {
-            for (int j = 0; j < picture.width(); j++) {
-                System.out.print(parent[i][j]);
-                System.out.print(" ");
-            }
-            System.out.println();
-        }
 
 
         // getting seam
@@ -283,8 +273,16 @@ public class SeamCarver {
         }
         picture = newPicture;
         for (int i = 0; i < picture.width(); i++) {
-            if (seam[i] > 0)newEnergy[seam[i]-1][i] = setEnergy(seam[i]-1, i);
-            newEnergy[seam[i]][i] = setEnergy(seam[i], i);
+            if (seam[i] > 0 && seam[i] < picture.height()) {
+                newEnergy[seam[i] - 1][i] = setEnergy(seam[i] - 1, i);
+                newEnergy[seam[i]][i] = setEnergy(seam[i], i);
+            }
+            else if (seam[i] == 0) {
+                newEnergy[seam[i]][i] = setEnergy(seam[i], i);
+            }
+            else {
+                newEnergy[seam[i] - 1][i] = setEnergy(seam[i] - 1, i);
+            }
         }
         energy = newEnergy;
     }
@@ -301,15 +299,23 @@ public class SeamCarver {
             for (int j = 0; j < picture.width(); j++) {
                 if (seam[i] != j) {
                     newPicture.setRGB(k, i, picture.getRGB(j, i));
-                    newEnergy[i][k] = energy[i][k];
+                    newEnergy[i][k] = energy[i][j];
                     k++;
                 }
             }
         }
         picture = newPicture;
         for (int i = 0; i < picture.height(); i++) {
-            if (seam[i] > 0)newEnergy[i][seam[i]-1] = setEnergy(i,seam[i]-1);
-            newEnergy[i][seam[i]] = setEnergy(i,seam[i]);
+            if (seam[i] > 0 && seam[i] < picture.height()) {
+                newEnergy[i][seam[i] - 1] = setEnergy(i, seam[i] - 1);
+                newEnergy[i][seam[i]] = setEnergy(i, seam[i]);
+            }
+            else if (seam[i] == 0) {
+                newEnergy[i][seam[i]] = setEnergy(i, seam[i]);
+            }
+            else {
+                newEnergy[i][seam[i] - 1] = setEnergy(i, seam[i] - 1);
+            }
         }
         energy = newEnergy;
     }
