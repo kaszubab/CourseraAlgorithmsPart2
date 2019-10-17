@@ -4,12 +4,12 @@
  *  Description:
  **************************************************************************** */
 
-import edu.princeton.cs.algs4.Bag;
+import edu.princeton.cs.algs4.FlowEdge;
+import edu.princeton.cs.algs4.FlowNetwork;
 import edu.princeton.cs.algs4.In;
-import edu.princeton.cs.algs4.StdOut;
+import edu.princeton.cs.algs4.Stack;
 
 import java.util.HashMap;
-import java.util.List;
 
 public class BaseballElimination {
 
@@ -37,6 +37,7 @@ public class BaseballElimination {
                 gamesMatrix[i][j] = gamesVersusJTeam;
             }
             i++;
+            file.readLine();
         }
     }                  // create a baseball division from given filename in format specified below
     public int numberOfTeams() {
@@ -57,16 +58,60 @@ public class BaseballElimination {
     public int against(String team1, String team2) {
         return gamesMatrix[teamDict.get(team1)[0]][teamDict.get(team2)[0]];
     }    // number of remaining games between team1 and team2
-    public boolean isEliminated(String team)              // is given team eliminated?
+    public boolean isEliminated(String team) {
+        int maxPossibleWins = teamDict.get(team)[1] + teamDict.get(team)[3];
+        //solution for trivial elimination
+        for (int[] x : teamDict.values()) {
+            if (maxPossibleWins < x[1]) return false;
+        }
+        System.out.println(teamDict.size());
+        FlowNetwork teamFlowNetwork = new FlowNetwork((teamDict.size() * (teamDict.size()-1))/2 + teamDict.size()+1);
+        int  curTeamIndex = teamDict.get(team)[0];
+        int gamesV = 1;
+        for (int  i = 0; i < gamesMatrix.length; i++) {
+            if (i != curTeamIndex) {
+                for (int j = i+1; j <gamesMatrix.length; j++) {
+                    FlowEdge sourceToTeamGames = new FlowEdge(0, gamesV, gamesMatrix[i][j]);
+                    gamesV++;
+                    teamFlowNetwork.addEdge(sourceToTeamGames);
+                }
+            }
+        }
+        int teamV = gamesV;
+        int howManyGamesWithOtherTeamsWillTeamPlay = teamDict.size()-1;
+        while ( howManyGamesWithOtherTeamsWillTeamPlay > 0) {
+            int currConfrontation = 1;
+            int otherTeamQuantity = 1;
+            int currTeamInBack = teamV + 1;
+            while (otherTeamQuantity < howManyGamesWithOtherTeamsWillTeamPlay) {
+                FlowEdge newEdge = new FlowEdge(currConfrontation, teamV, Double.POSITIVE_INFINITY);
+                teamFlowNetwork.addEdge(newEdge);
+                newEdge = new FlowEdge(currConfrontation, currTeamInBack, Double.POSITIVE_INFINITY);
+                teamFlowNetwork.addEdge(newEdge);
+                currConfrontation++;
+                otherTeamQuantity++;
+                currTeamInBack++;
+            }
+            teamV++;
+            howManyGamesWithOtherTeamsWillTeamPlay--;
+        }
+        System.out.println(teamFlowNetwork);
+        return true;
+    }              // is given team eliminated?
 
 
-    public Iterable<String> certificateOfElimination(String team)  // subset R of teams that eliminates given team; null if not eliminated
+    public Iterable<String> certificateOfElimination(String team){
+        Stack<String> newStack = new Stack<>();
+        newStack.push("5");
+        return newStack;
+    }  // subset R of teams that eliminates given team; null if not eliminated
 
 
 
     public static void main(String[] args) {
         BaseballElimination division = new BaseballElimination(args[0]);
-        for (String team : division.teams()) {
+        division.isEliminated("Atlanta");
+        /*for (String team : division.teams()) {
             if (division.isEliminated(team)) {
                 StdOut.print(team + " is eliminated by the subset R = { ");
                 for (String t : division.certificateOfElimination(team)) {
@@ -77,6 +122,6 @@ public class BaseballElimination {
             else {
                 StdOut.println(team + " is not eliminated");
             }
-        }
+        }*/
     }
 }
