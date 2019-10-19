@@ -64,8 +64,7 @@ public class BaseballElimination {
         for (int[] x : teamDict.values()) {
             if (maxPossibleWins < x[1]) return false;
         }
-        System.out.println(teamDict.size());
-        FlowNetwork teamFlowNetwork = new FlowNetwork((teamDict.size() * (teamDict.size()-1))/2 + teamDict.size()+1);
+        FlowNetwork teamFlowNetwork = new FlowNetwork(((teamDict.size()-1) * (teamDict.size()-2))/2 + teamDict.size()+1);
         int  curTeamIndex = teamDict.get(team)[0];
         int gamesV = 1;
         for (int  i = 0; i < gamesMatrix.length; i++) {
@@ -78,12 +77,12 @@ public class BaseballElimination {
             }
         }
         int teamV = gamesV;
-        int howManyGamesWithOtherTeamsWillTeamPlay = teamDict.size()-1;
+        int howManyGamesWithOtherTeamsWillTeamPlay = teamDict.size()-2;
+        int currConfrontation = 1;
         while ( howManyGamesWithOtherTeamsWillTeamPlay > 0) {
-            int currConfrontation = 1;
             int otherTeamQuantity = 1;
             int currTeamInBack = teamV + 1;
-            while (otherTeamQuantity < howManyGamesWithOtherTeamsWillTeamPlay) {
+            while (otherTeamQuantity <= howManyGamesWithOtherTeamsWillTeamPlay) {
                 FlowEdge newEdge = new FlowEdge(currConfrontation, teamV, Double.POSITIVE_INFINITY);
                 teamFlowNetwork.addEdge(newEdge);
                 newEdge = new FlowEdge(currConfrontation, currTeamInBack, Double.POSITIVE_INFINITY);
@@ -94,6 +93,14 @@ public class BaseballElimination {
             }
             teamV++;
             howManyGamesWithOtherTeamsWillTeamPlay--;
+        }
+        int i = gamesV;
+        for (String x : teamDict.keySet()) {
+            if (!(x.equals(team))) {
+                FlowEdge newEdge = new FlowEdge(i,teamV+1,maxPossibleWins - teamDict.get(x)[1]);
+                teamFlowNetwork.addEdge(newEdge);
+                i++;
+            }
         }
         System.out.println(teamFlowNetwork);
         return true;
