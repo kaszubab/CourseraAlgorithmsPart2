@@ -90,9 +90,9 @@ public class BaseballElimination {
         return teamFlowNetwork;
     }
 
-    private void validateEntry (String team) {
+    private void validateEntry(String team) {
         if (team == null)throw new IllegalArgumentException();
-        if (!(teamDict.containsKey(team)) throw  new IllegalArgumentException();
+        if (!(teamDict.containsKey(team))) throw  new IllegalArgumentException();
     }
 
 
@@ -103,27 +103,34 @@ public class BaseballElimination {
         return teamDict.keySet();
     }                                // all teams
     public int wins(String team) {
+        validateEntry(team);
         return teamDict.get(team)[1];
     }                    // number of wins for given team
     public int losses(String team) {
+        validateEntry(team);
         return teamDict.get(team)[2];
     }                    // number of losses for given team
     public int remaining(String team) {
+        validateEntry(team);
         return teamDict.get(team)[3];
     }                // number of remaining games for given team
     public int against(String team1, String team2) {
+        validateEntry(team1);
+        validateEntry(team2);
         return gamesMatrix[teamDict.get(team1)[0]][teamDict.get(team2)[0]];
     }    // number of remaining games between team1 and team2
 
     public boolean isEliminated(String team) {
+        validateEntry(team);
         int maxPossibleWins = teamDict.get(team)[1] + teamDict.get(team)[3];
         // solution for trivial elimination
         for (int[] x : teamDict.values()) {
-            if (maxPossibleWins < x[1]) return false;
+            if (maxPossibleWins < x[1]) return true;
         }
         FlowNetwork teamFlowNetwork = makeFlowNetwork(team, maxPossibleWins);
+        // System.out.println(teamFlowNetwork);
         FordFulkerson checkingMaxFlow = new FordFulkerson(teamFlowNetwork, 0, (((teamDict.size()-1) * (teamDict.size()-2))/2) + teamDict.size());
-        for (int i = ((teamDict.size()-2) * teamDict.size()-1)/2 + 1; i < ((teamDict.size()-2) * teamDict.size()-1)/2 + teamDict.size(); i++) {
+        for (int i = ((teamDict.size()-2) * (teamDict.size()-1)/2 + 1); i < ((teamDict.size()-2) * (teamDict.size()-1)/2 + teamDict.size()); i++) {
             if (checkingMaxFlow.inCut(i)) return true;
         }
         return false;
@@ -131,6 +138,7 @@ public class BaseballElimination {
 
 
     public Iterable<String> certificateOfElimination(String team) {
+        validateEntry(team);
         Stack<String> newStack = new Stack<>();
         int maxPossibleWins = teamDict.get(team)[1] + teamDict.get(team)[3];
         // solution for trivial elimination
@@ -145,13 +153,14 @@ public class BaseballElimination {
         FlowNetwork teamFlowNetwork = makeFlowNetwork(team, maxPossibleWins);
         FordFulkerson checkingMaxFlow = new FordFulkerson(teamFlowNetwork, 0, (((teamDict.size()-1) * (teamDict.size()-2))/2) + teamDict.size());
         int currTeamIndex = 0;
-        for (int i = ((teamDict.size()-2) * teamDict.size()-1)/2 + 1; i < ((teamDict.size()-2) * teamDict.size()-1)/2 + teamDict.size(); i++) {
+        for (int i = ((teamDict.size()-2) * (teamDict.size()-1)/2 + 1); i < ((teamDict.size()-2) * (teamDict.size()-1)/2 + teamDict.size()); i++) {
             if (checkingMaxFlow.inCut(i)) {
                 newStack.push(reverseDict.get(currTeamIndex));
             }
             currTeamIndex++;
             if (currTeamIndex < reverseDict.size() && reverseDict.get(currTeamIndex).equals(team))currTeamIndex++;
         }
+        if (newStack.isEmpty()) return null;
         return newStack;
     }  // subset R of teams that eliminates given team; null if not eliminated
 
