@@ -27,7 +27,7 @@ public class BoggleSolver
     }
 
     private boolean isValidIndex(int x, int y, BoggleBoard board) {
-        if (y < board.cols() && y >= 0 && x < board.cols() && x >= 0) return true;
+        if (y < board.cols() && y >= 0 && x < board.rows() && x >= 0) return true;
         return false;
     }
 
