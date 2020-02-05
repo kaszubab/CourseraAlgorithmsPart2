@@ -32,11 +32,8 @@
       <file leaf-file-name="BoggleGame.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BoggleGame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="141">
+            <state relative-caret-position="2380">
               <caret line="188" column="69" selection-start-line="188" selection-start-column="69" selection-end-line="188" selection-end-column="69" />
-              <folding>
-                <element signature="e#8074#8075#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -44,14 +41,10 @@
       <file leaf-file-name="BoggleSolver.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/BoggleSolver.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="389">
+            <state relative-caret-position="17">
               <caret line="76" selection-start-line="76" selection-end-line="76" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1537#1538#0" expanded="true" />
-                <element signature="e#1582#1583#0" expanded="true" />
-                <element signature="e#2181#2182#0" expanded="true" />
-                <element signature="e#2242#2243#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -70,7 +63,7 @@
       <file leaf-file-name="BoggleBoard.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BoggleBoard.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
+            <state relative-caret-position="2499">
               <caret line="158" column="32" selection-start-line="158" selection-start-column="32" selection-end-line="158" selection-end-column="32" />
               <folding>
                 <element signature="e#6311#6312#0" expanded="true" />
@@ -103,10 +96,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-9" />
-    <option name="y" value="-9" />
-    <option name="width" value="978" />
-    <option name="height" value="1048" />
+    <option name="x" value="-10" />
+    <option name="y" value="-10" />
+    <option name="width" value="980" />
+    <option name="height" value="1050" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -117,8 +110,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="AndroidView" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -131,7 +125,6 @@
         </subPane>
         <option name="show-excluded-files" value="false" />
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -248,6 +241,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" show_stripe_button="false" weight="0.32904148" />
@@ -264,7 +258,7 @@
       <window_info anchor="bottom" id="Terminal" order="9" weight="0.32905984" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.10402685" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.10671141" />
       <window_info id="Structure" order="1" show_stripe_button="false" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
@@ -290,9 +284,80 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2380">
           <caret line="188" column="69" selection-start-line="188" selection-start-column="69" selection-end-line="188" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/board-antidisestablishmentarianisms.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dictionary-yawl.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BoggleBoard.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2499">
+          <caret line="158" column="32" selection-start-line="158" selection-start-column="32" selection-end-line="158" selection-end-column="32" />
           <folding>
-            <element signature="e#8074#8075#0" expanded="true" />
+            <element signature="e#6311#6312#0" expanded="true" />
+            <element signature="e#6345#6346#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BoggleSolver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1207">
+          <caret line="76" selection-start-line="76" selection-end-line="76" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/logo.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BoggleGame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3196">
+          <caret line="188" column="69" selection-start-line="188" selection-start-column="69" selection-end-line="188" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/board-antidisestablishmentarianisms.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dictionary-yawl.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BoggleBoard.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2686">
+          <caret line="158" column="32" selection-start-line="158" selection-start-column="32" selection-end-line="158" selection-end-column="32" />
+          <folding>
+            <element signature="e#6311#6312#0" expanded="true" />
+            <element signature="e#6345#6346#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BoggleSolver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1292">
+          <caret line="76" selection-start-line="76" selection-end-line="76" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/logo.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BoggleGame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2380">
+          <caret line="188" column="69" selection-start-line="188" selection-start-column="69" selection-end-line="188" selection-end-column="69" />
         </state>
       </provider>
     </entry>
@@ -313,10 +378,6 @@
           <caret line="111" column="22" lean-forward="true" selection-start-line="111" selection-start-column="22" selection-end-line="111" selection-end-column="22" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1537#1538#0" expanded="true" />
-            <element signature="e#1582#1583#0" expanded="true" />
-            <element signature="e#2181#2182#0" expanded="true" />
-            <element signature="e#2242#2243#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -332,17 +393,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/BoggleGame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
+        <state relative-caret-position="2380">
           <caret line="188" column="69" selection-start-line="188" selection-start-column="69" selection-end-line="188" selection-end-column="69" />
-          <folding>
-            <element signature="e#8074#8075#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BoggleBoard.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
+        <state relative-caret-position="2499">
           <caret line="158" column="32" selection-start-line="158" selection-start-column="32" selection-end-line="158" selection-end-column="32" />
           <folding>
             <element signature="e#6311#6312#0" expanded="true" />
@@ -353,14 +411,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/BoggleSolver.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="389">
+        <state relative-caret-position="17">
           <caret line="76" selection-start-line="76" selection-end-line="76" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1537#1538#0" expanded="true" />
-            <element signature="e#1582#1583#0" expanded="true" />
-            <element signature="e#2181#2182#0" expanded="true" />
-            <element signature="e#2242#2243#0" expanded="true" />
           </folding>
         </state>
       </provider>
