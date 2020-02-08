@@ -18,7 +18,7 @@ public class MoveToFront {
             char c = BinaryStdIn.readChar();
             int asciiCode = (int) c;
 
-            BinaryStdOut.write(characterSequence.indexOf(asciiCode));
+            BinaryStdOut.write((char) characterSequence.indexOf(asciiCode));
 
             characterSequence.remove((Integer) asciiCode);
             characterSequence.addFirst(asciiCode);
@@ -39,13 +39,11 @@ public class MoveToFront {
         }
 
         while (!BinaryStdIn.isEmpty()) {
+
             char c = BinaryStdIn.readChar();
+
             int asciiCode = (int) c;
-
-            System.out.println(1 + "  " + c);
-
             BinaryStdOut.write((char) (int) characterSequence.get(asciiCode));
-
 
             int character = characterSequence.remove(asciiCode);
             characterSequence.addFirst(character);
